@@ -15,15 +15,20 @@
     <main>
         <div class="col-12 col-md-3 p-2">
             <div>
-                <form class="row m-2">
+                <form class="row m-2" id="user-form">
                     <label class="form-label p-0"><h2>Search for a city:</h2></label>
                     <input type="text" class="form-input" autofocus="true" id="city-name" placeholder="Enter city name" />
                     <button type="submit" class="btn mt-4" id="search-btn">Search</button>
                 </form>
                 <hr>
             </div>
+
+            <div class="list-group" id="city-list">
+
+            </div>
         </div>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="./assests/js/script.js"></script>
 </body>
 </html>
