@@ -10,6 +10,10 @@ var liTempEl=document.querySelector('#list-temp');
 var liWindEl=document.querySelector('#list-wind');
 var liHumidityEl=document.querySelector('#list-humidity');
 var liUvEl=document.querySelector('#list-uv');
+
+var divFiveDay=document.querySelector("#five-day-weather");
+
+var fiveEl=document.querySelector("#five-day");
 //array to store in local storage
 var cityArr=JSON.parse(localStorage.getItem('cityName')) || [];
 
@@ -36,6 +40,7 @@ var saveCity=function(event){
     localStorage.setItem("cityName",JSON.stringify(cityArr));
     cityNameEl.value=" ";
     getWeather(cityName);
+    divFiveDay.innerHTML="";
     // if(JSON.parse(localStorage.getItem))
 }
 
@@ -58,19 +63,16 @@ var getWeather=function(cityName){
             displayWeather(data);
         })
     })
-    
+    var fiveDayApi="https://api.openweathermap.org/data/2.5/forecast?q="+cityName+"&units=imperial&APPID=a1ebf05a20a8fd712b4baf5c960acf21"
+    fetch(fiveDayApi).then(function(response){
+        response.json().then(function(data){
+            fiveDayDisplay(data);
+        })
+    })
 }
 var displayWeather=function(data){
-    console.log(data.weather.icon);
-    var id=data.weather.description;
-    console.log(id);
     //display single data for the weather
     weatherCurrentEl.classList="border p-2";
-    //display header
-    // var icon="http://openweathermap.org/img/w/"+data.weather.icon+".png";
-    // var imgEl=document.createElement("img");
-    // imgEl.setAttribute("src",icon);
-    // headingEl.appendChild(imgEl);
     headingEl.textContent=data.name+" ("+moment.unix(data.dt).format("MM/DD/YYYY")+")";
     liTempEl.textContent="Temp: "+data.main.temp+" F";
     liWindEl.textContent="Wind: "+data.wind.speed+" MPH";
@@ -83,8 +85,27 @@ var displayWeather=function(data){
            liUvEl.textContent="UV index: "+data.current.uvi;
         })
     })
+}
+var fiveDayDisplay=function(data){
+    //display five day weather
+    fiveEl.textContent="5-Day Forecast:";
+    for(var i=4;i<=36;i=i+8){
+        var date=moment.unix(data.list[i].dt).format("MM/DD/YYYY");
+        var divEl=document.createElement("div");
+        var h4El=document.createElement("h4");
+        h4El.textContent=date;
+        divEl.appendChild(h4El);
+        var arr=[data.list[i].main.temp,data.list[i].wind.speed,data.list[i].main.humidity];
+        var arrName=["Temp: ","Wind: ","Humidity: "];
+        var arrSymbol=["F","MPH","%"];
+        for(var j=0;j<arr.length;j++){
+            var pEl=document.createElement("p");
+            pEl.textContent=arrName[j]+arr[j]+arrSymbol[j];
+            divEl.appendChild(pEl);
+        }
+        divFiveDay.appendChild(divEl);
 
-
+    }
 }
 displayContent();
 formEl.addEventListener("submit",saveCity);
