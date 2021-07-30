@@ -10,3 +10,7 @@ header h1{
     background-color: #5098e6;
     color: white;
 }
+
+.list-details{
+    list-style-type:none;
+}
