@@ -27,9 +27,9 @@ var displayCity=function(cityName){
 
     cityListEl.appendChild(cityNameEl);
     
-    // cityNameEl.addEventListener("click",function(){
-    //     alert("sjngdfjsg");
-    // })
+    cityNameEl.addEventListener("click",function(){
+        getWeather(cityName);
+    })
 }
 
 
@@ -42,8 +42,6 @@ var saveCity=function(event){
     localStorage.setItem("cityName",JSON.stringify(cityArr));
     cityNameEl.value=" ";
     getWeather(cityName);
-    divFiveDay.innerHTML="";
-    // if(JSON.parse(localStorage.getItem))
 }
 
 //display content from local storage
@@ -62,6 +60,7 @@ var getWeather=function(cityName){
     var apiUrl='https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&APPID=a1ebf05a20a8fd712b4baf5c960acf21';
     fetch(apiUrl).then(function(response){
         response.json().then(function(data){
+            divFiveDay.innerHTML="";
             displayWeather(data);
         })
     })
@@ -100,8 +99,6 @@ var displayWeather=function(data){
 var fiveDayDisplay=function(data){
     //display five day weather
     fiveEl.textContent="5-Day Forecast:";
-    var x=data.daily;
-    console.log(x.length);
     for(var i=1;i<6;i++){
         var date=moment.unix(data.daily[i].dt).format("MM/DD/YYYY");
         var divEl=document.createElement("div");
