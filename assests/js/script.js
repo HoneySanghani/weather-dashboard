@@ -87,7 +87,7 @@ var getWeather=function(event){
     })
 }
 
-//display weather for a particular
+//display weather for a particular city
 var displayWeather=function(data){
     //load icon
     var weatherCode=data.weather[0].icon;
