@@ -1,9 +1,14 @@
+//elements for the form
+var formEl=document.querySelector("#user-form");
 var cityNameEl=document.querySelector("#city-name");
 var submitBtn=document.querySelector("#search-btn");
-var formEl=document.querySelector("#user-form");
+
+//for showing history of cities
 var cityListEl=document.querySelector("#city-list");
 
+//for today's temperature
 var weatherCurrentEl=document.querySelector("#today-weather");
+var heading=document.querySelector("#current-heading");
 var headingEl=document.querySelector("#heading-weather");
 var ulEl=document.querySelector("#list");
 var liTempEl=document.querySelector('#list-temp');
@@ -11,39 +16,21 @@ var liWindEl=document.querySelector('#list-wind');
 var liHumidityEl=document.querySelector('#list-humidity');
 var liUvEl=document.querySelector('#list-uv');
 
-var heading=document.querySelector("#current-heading");
-
+//for next five day temperature
 var divFiveDay=document.querySelector("#five-day-weather");
-
 var fiveEl=document.querySelector("#five-day");
+
 //array to store in local storage
 var cityArr=JSON.parse(localStorage.getItem('cityName')) || [];
 
-//to display city name under th form 
-var displayCity=function(cityName){
-    var cityNameEl=document.createElement("button");
-    cityNameEl.classList="list-item border-0  btn btn-secondary btn-lg m-3";
-    cityNameEl.textContent=cityName;
-
-    cityListEl.appendChild(cityNameEl);
-    
-    cityNameEl.addEventListener("click",function(){
-        getWeather(cityName);
-    })
-}
-
-
 //to save in local storage on btn click
-var saveCity=function(event){
-    event.preventDefault();
-    var cityName=cityNameEl.value.trim();
+var saveCity=function(cityName){
+    // event.preventDefault();
     cityArr.push(cityName);
     displayCity(cityName);
     localStorage.setItem("cityName",JSON.stringify(cityArr));
     cityNameEl.value=" ";
-    getWeather(cityName);
 }
-
 //display content from local storage
 var displayContent=function(){
     let city=JSON.parse(localStorage.getItem("cityName"));
@@ -56,15 +43,50 @@ var displayContent=function(){
         }
     }
 }
-var getWeather=function(cityName){
+
+//to display city name under the form 
+var displayCity=function(cityName){
+    var cityNameEl=document.createElement("button");
+    cityNameEl.classList="list-item border-0  btn btn-secondary btn-lg m-3";
+    cityNameEl.textContent=cityName;
+
+    cityListEl.appendChild(cityNameEl);
+    
+    cityNameEl.addEventListener("click",function(){
+        displayCityWeather(cityName);
+    })
+}
+var displayCityWeather=function(cityName){
+    divFiveDay.innerHTML="";
     var apiUrl='https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&APPID=a1ebf05a20a8fd712b4baf5c960acf21';
     fetch(apiUrl).then(function(response){
         response.json().then(function(data){
-            divFiveDay.innerHTML="";
             displayWeather(data);
         })
     })
 }
+
+//get weather from api
+var getWeather=function(event){
+    event.preventDefault();
+    var cityName=cityNameEl.value.trim();
+    var apiUrl='https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&APPID=a1ebf05a20a8fd712b4baf5c960acf21';
+    fetch(apiUrl).then(function(response){
+        response.json().then(function(data){
+            divFiveDay.innerHTML="";
+            if(response.ok){
+                displayWeather(data);
+                saveCity(cityName);
+            }
+            else{
+                alert("Please enter valid city name!");
+                cityNameEl.value=" ";
+            }
+        })
+    })
+}
+
+//display weather for a particular
 var displayWeather=function(data){
     //load icon
     var weatherCode=data.weather[0].icon;
@@ -96,8 +118,8 @@ var displayWeather=function(data){
         })
     })
 }
+ //display five day weather
 var fiveDayDisplay=function(data){
-    //display five day weather
     fiveEl.textContent="5-Day Forecast:";
     for(var i=1;i<6;i++){
         var date=moment.unix(data.daily[i].dt).format("MM/DD/YYYY");
@@ -124,4 +146,4 @@ var fiveDayDisplay=function(data){
     }
 }
 displayContent();
-formEl.addEventListener("submit",saveCity);
+formEl.addEventListener("submit",getWeather);
