@@ -109,9 +109,31 @@ var displayWeather=function(data){
     var uvIndexApi="https://api.openweathermap.org/data/2.5/onecall?lat="+data.coord.lat+"&lon="+data.coord.lon+"&exclude=hourly,minutely&appid=a1ebf05a20a8fd712b4baf5c960acf21";
     fetch(uvIndexApi).then(function(response){
         response.json().then(function(data){
-           liUvEl.textContent="UV index: "+data.current.uvi;
+        //    liUvEl.textContent="UV index: "+data.current.uvi;
+            liUvEl.textContent="UV index:";
+            var uvIndex=data.current.uvi
+            var p=document.createElement("p");
+            p.textContent=+ uvIndex;
+            liUvEl.appendChild(p);
+            if(uvIndex<=2){
+                p.classList="bg-success text-white px-2 rounded mx-1";
+            }
+            else if(uvIndex>=3&&uvIndex<=5){
+                p.classList=" ";
+                p.classList="bg-warning text-white px-2 rounded mx-1";
+            }
+            else if(uvIndex>=6&&uvIndex<=7){
+                p.classList="orange text-white px-2 rounded mx-1";
+            }
+            else if(uvIndex>=8&&uvIndex<=10){
+                p.classList="bg-danger text-white px-2 rounded mx-1";
+            }
+            else if(uvIndex>=11){
+                p.classList="purple text-white px-2 rounded mx-1";
+            }
         })
     })
+    //call fucntion to display five day data
     var fiveDayApi="https://api.openweathermap.org/data/2.5/onecall?lat="+data.coord.lat+"&lon="+data.coord.lon+"&units=imperial&APPID=a1ebf05a20a8fd712b4baf5c960acf21";
     fetch(fiveDayApi).then(function(response){
         response.json().then(function(data){

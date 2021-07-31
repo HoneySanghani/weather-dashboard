@@ -25,3 +25,9 @@ header h1{
   display: flex;
   flex-wrap: wrap;
 }
+.orange{
+    background-color: orange;
+}
+.purple{
+    background-color:purple
+}
