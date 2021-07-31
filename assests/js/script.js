@@ -56,6 +56,7 @@ var displayCity=function(cityName){
         displayCityWeather(cityName);
     })
 }
+//to get content when the histroy button clicked
 var displayCityWeather=function(cityName){
     divFiveDay.innerHTML="";
     var apiUrl='https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&APPID=a1ebf05a20a8fd712b4baf5c960acf21';
