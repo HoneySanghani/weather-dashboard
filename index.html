@@ -26,7 +26,9 @@
         </div>
         <div class="col-8 p-3">
             <div id="today-weather">
-                <h2 id="heading-weather"></h2>
+                <div id="current-heading" class="d-flex p-0 align-center">
+                    <h2 id="heading-weather"><img src="" id="icon"/></h2>
+                </div>
                 <ul class="list-group list-details" id="list">
                     <li class="list-item pt-2" id="list-temp"></li>
                     <li class="list-item pt-2" id="list-wind"></li>
@@ -34,8 +36,10 @@
                     <li class="list-item pt-2" id="list-uv"></li>
                 </ul>
             </div>
-            <div id="five-day-weather">
+            <div>
                 <h3 id="five-day"></h3>
+                <div id="five-day-weather" class="container-five-day">
+                </div>
             </div>
         </div>
     </main>

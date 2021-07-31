@@ -14,3 +14,17 @@ header h1{
 .list-details{
     list-style-type:none;
 }
+/*for the five day div*/
+.main-div{
+    background-color:#2d3e50;
+    color: white;
+}
+.container-five-day{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.icon-img{
+    width:1px;
+    height: 120px;
+}
