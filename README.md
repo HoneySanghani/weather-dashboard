@@ -4,7 +4,7 @@
 To check weather for a particular city using OpenWeather API.
 
 ## Function 
-Enter a valid city name in the form and sumbit then you will get current weather and five day forecast fot that particular city. Also each time you search a city it is stored in local storage and it is displayed under they search form. When you click a city from the page then you will get particular weather on that day.
+Enter a valid city name in the form and sumbit then you will get current weather and five day forecast fot that particular city. Also each time you search a city it is stored in local storage and it is displayed under the search form. When you click a city from the page then you will get particular weather on that day.
 
 ## Built-with
 HTML
