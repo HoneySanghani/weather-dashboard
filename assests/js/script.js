@@ -128,7 +128,7 @@ var displayWeather=function(data){
             else if(uvIndex>=8&&uvIndex<=10){
                 p.classList="bg-danger text-white px-2 rounded mx-1";
             }
-            else if(uvIndex>=11){
+            else if(uvIndex>10){
                 p.classList="purple text-white px-2 rounded mx-1";
             }
         })
