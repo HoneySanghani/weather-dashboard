@@ -20,4 +20,4 @@ https://honeysanghani.github.io/weather-dashboard/
 https://github.com/HoneySanghani/weather-dashboard.git
 
 ## Output
-![screencapture-file-C-Users-honey-Desktop-projects-weather-dashboard-index-html-2021-07-31-04_12_46](https://user-images.githubusercontent.com/48147515/127733824-aef71fdc-a122-4ff8-afba-9d2f3aed3866.png)
+![screencapture-file-C-Users-honey-Desktop-projects-weather-dashboard-index-html-2021-08-01-11_11_06](https://user-images.githubusercontent.com/48147515/127775989-7d9b43a9-54e9-452a-9cc8-bd956ed6c3fc.png)
