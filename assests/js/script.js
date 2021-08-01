@@ -118,14 +118,14 @@ var displayWeather=function(data){
             if(uvIndex<=2){
                 p.classList="bg-success text-white px-2 rounded mx-1";
             }
-            else if(uvIndex>=3&&uvIndex<=5){
+            else if(uvIndex>2&&uvIndex<=5){
                 p.classList=" ";
                 p.classList="bg-warning text-white px-2 rounded mx-1";
             }
-            else if(uvIndex>=6&&uvIndex<=7){
+            else if(uvIndex>5&&uvIndex<=7){
                 p.classList="orange text-white px-2 rounded mx-1";
             }
-            else if(uvIndex>=8&&uvIndex<=10){
+            else if(uvIndex>7&&uvIndex<=10){
                 p.classList="bg-danger text-white px-2 rounded mx-1";
             }
             else if(uvIndex>10){
